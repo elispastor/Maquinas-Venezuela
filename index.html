@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MAQUINAS VENEZUELA | Compra y Venta de Máquinas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#0b1c3a,#1e3a5f);color:white}
+        .menu-ham{position:fixed;top:20px;right:20px;z-index:1000}
+        .menu-ham button{background:rgba(251,191,36,0.9);color:#0b1c3a;border:none;padding:12px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+        .sidebar{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:rgba(17,43,79,0.98);backdrop-filter:blur(20px);transition:right 0.3s;z-index:999;padding:80px 20px 20px}
+        .sidebar.active{right:0}
+        .sidebar nav{display:flex;flex-direction:column;gap:20px}
+        .sidebar nav a{color:white;font-size:1.2rem;text-decoration:none;padding:12px;display:block;border-bottom:1px solid rgba(251,191,36,0.3)}
+        .sidebar nav a:hover{color:#fbbf24}
+        .card{background:rgba(17,43,79,0.9);backdrop-filter:blur(10px);border:1px solid rgba(251,191,36,0.3);border-radius:20px;padding:30px;margin-bottom:30px}
+        .btn{padding:12px 30px;border-radius:50px;font-weight:bold;text-decoration:none;display:inline-block;transition:transform 0.2s}
+        .btn:hover{transform:scale(1.05)}
+        .btn-primary{background:linear-gradient(45deg,#fbbf24,#f59e0b);color:#0b1c3a}
+        .btn-wsp{background:#25d366;color:white}
+        .btn-call{background:#34B7F1;color:white}
+        .whatsapp-float{position:fixed;bottom:30px;right:30px;width:60px;height:60px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;z-index:1000}
+        .call-float{position:fixed;bottom:30px;right:105px;width:60px;height:60px;background:#34B7F1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;z-index:1000}
+        .carrusel{position:relative;height:300px;border-radius:20px;overflow:hidden;margin:30px 0}
+        .carrusel-slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.5s ease}
+        .carrusel-slide.active{opacity:1}
+        .carrusel-slide img{width:100%;height:100%;object-fit:cover}
+        .servicios-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+        .servicio-item{background:rgba(0,0,0,0.3);border-radius:30px;padding:8px 18px;font-size:0.85rem}
+        .footer{background:rgba(11,28,58,0.95);border-top:2px solid rgba(251,191,36,0.3);padding:40px 20px;text-align:center;margin-top:60px}
+        .absolute-bottom{position:absolute;bottom:10px;left:0;right:0;text-align:center;background:rgba(0,0,0,0.6);padding:6px;font-size:0.75rem}
+        @media (max-width:768px){.call-float{right:100px}.carrusel{height:220px}}
+    </style>
+</head>
+<body>
+
+<div class="menu-ham"><button onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div>
+<div class="sidebar" id="sidebar">
+    <button onclick="toggleMenu()" style="position:absolute;top:20px;right:20px;color:#fbbf24;font-size:1.5rem;background:none;border:none;">×</button>
+    <nav>
+        <a href="#inicio" onclick="toggleMenu()">🏠 Inicio</a>
+        <a href="#servicios" onclick="toggleMenu()">🔧 Servicios</a>
+        <a href="#galeria" onclick="toggleMenu()">📸 Galería</a>
+        <a href="#contacto" onclick="toggleMenu()">📞 Contacto</a>
+        <a href="#" onclick="compartirSitio()">📤 Compartir</a>
+        <a href="#actualizar" onclick="toggleMenu()">🔄 Actualizar</a>
+    </nav>
+</div>
+
+<a href="https://wa.me/573153017308?text=Hola,%20quiero%20información%20sobre%20máquinas" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<a href="tel:+573153017308" class="call-float"><i class="fas fa-phone-alt"></i></a>
+
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+
+    <!-- PORTADA -->
+    <section id="inicio" class="text-center mb-12">
+        <img src="portada.jpg" alt="MAQUINAS VENEZUELA" class="w-full rounded-2xl shadow-xl border border-amber-400">
+    </section>
+
+    <!-- CARRUSEL -->
+    <section id="galeria" class="card">
+        <h2 class="text-3xl font-bold text-amber-400 text-center mb-4">📸 MAQUINARIA Y EQUIPOS</h2>
+        <div class="carrusel" id="carrusel">
+            <div class="carrusel-slide active"><img src="foto1.jpg" alt="Máquina 1"><div class="absolute-bottom">🔧 Maquinaria industrial</div></div>
+            <div class="carrusel-slide"><img src="foto2.jpg" alt="Máquina 2"><div class="absolute-bottom">🛠️ Equipo de precisión</div></div>
+            <div class="carrusel-slide"><img src="foto3.jpg" alt="Máquina 3"><div class="absolute-bottom">⚙️ Alta tecnología</div></div>
+            <div class="carrusel-slide"><img src="foto4.jpg" alt="Máquina 4"><div class="absolute-bottom">🏗️ Para tu taller</div></div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="card">
+        <h2 class="text-3xl font-bold text-amber-400 text-center mb-4">🔧 SERVICIOS</h2>
+        <div class="servicios-grid">
+            <span class="servicio-item">✅ Compra y venta de máquinas</span>
+            <span class="servicio-item">✅ Servicio técnico especializado</span>
+            <span class="servicio-item">✅ Asesoría industrial</span>
+        </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="card">
+        <h2 class="text-3xl font-bold text-amber-400 text-center mb-4">👥 NOSOTROS</h2>
+        <div class="text-center mb-4">
+            <i class="fas fa-user-circle text-6xl text-amber-400 mb-2"></i>
+            <h3 class="text-2xl font-bold text-white">Freddy Angarita</h3>
+            <p class="text-gray-300 mt-2 max-w-2xl mx-auto">Con años de experiencia en la compra y venta de maquinaria industrial, ofrecemos equipos de calidad y servicio técnico especializado en Cúcuta.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-black/30 p-4 rounded-xl text-center"><i class="fas fa-bullseye text-4xl text-amber-400 mb-2"></i><h3 class="text-xl font-bold">Misión</h3><p class="text-sm">Proveer maquinaria de calidad y servicio técnico confiable para la industria.</p></div>
+            <div class="bg-black/30 p-4 rounded-xl text-center"><i class="fas fa-eye text-4xl text-amber-400 mb-2"></i><h3 class="text-xl font-bold">Visión</h3><p class="text-sm">Ser el referente en maquinaria industrial en Norte de Santander.</p></div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="card">
+        <h2 class="text-3xl font-bold text-amber-400 text-center mb-6">📞 CONTACTO</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <p><i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> <strong>Dirección:</strong></p>
+                <p class="ml-6">AV 9 # 8-89 BARRIO EL LLANO - CÚCUTA, COLOMBIA</p>
+                <p class="mt-4"><i class="fas fa-phone-alt text-amber-400 mr-2"></i> <strong>Teléfono / WhatsApp:</strong></p>
+                <p class="ml-6">315 3017 308</p>
+                <p class="mt-4"><i class="fas fa-envelope text-amber-400 mr-2"></i> <strong>Correo:</strong></p>
+                <p class="ml-6">angaritaquinterofreddy@gmail.com</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://wa.me/573153017308" class="btn-wsp flex-1 min-w-[160px] text-center py-4 rounded-xl text-lg font-bold"><i class="fab fa-whatsapp text-2xl mr-2"></i> WhatsApp</a>
+                <a href="tel:+573153017308" class="btn-call flex-1 min-w-[160px] text-center py-4 rounded-xl text-lg font-bold"><i class="fas fa-phone-alt text-2xl mr-2"></i> Llamar</a>
+                <a href="#" onclick="compartirSitio()" class="btn-primary flex-1 min-w-[160px] text-center py-4 rounded-xl text-lg font-bold"><i class="fas fa-share-alt text-2xl mr-2"></i> Compartir</a>
+            </div>
+        </div>
+        <div class="mt-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.456789!2d-72.508789!3d7.893456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e42a5b8c9d4e2f1%3A0x123456789abcdef0!2sAV%209%20%238-89%2C%20C%C3%BAcuta!5e0!3m2!1ses!2sco!4v1690000000000!5m2!1ses!2sco" class="w-full h-64 rounded-xl border-2 border-amber-400" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- OFICINA VIRTUAL -->
+    <section id="oficina-virtual" class="card text-center">
+        <div class="flex justify-between items-center flex-wrap gap-2 mb-2">
+            <span class="bg-amber-400 text-black px-3 py-1 rounded-full text-sm font-bold">⭐ PLAN PRO ⭐</span>
+            <span class="text-xs text-gray-300">NGE - Nueva Generación Emprendedora</span>
+        </div>
+        <h2 class="text-3xl font-bold text-amber-400 mb-2">🚀 GANA CON NOSOTROS</h2>
+        <p class="text-gray-300 mb-4">Comparte tu código y recibe comisiones por cada referido.</p>
+        <div class="bg-black/30 rounded-xl p-4 mb-4">
+            <p class="text-sm text-gray-300">TU CÓDIGO DE AFILIADO</p>
+            <p class="text-3xl font-bold text-amber-400 tracking-wider" id="codigoAfiliado">NGE-204</p>
+            <p class="text-xs text-gray-400 mt-1">NUEVA GENERACIÓN EMPRENDEDORA</p>
+            <button onclick="copiarCodigo()" class="btn-primary mt-2 py-2 px-6 text-sm rounded-full">📋 Copiar código</button>
+        </div>
+        <button id="btnOficina" class="btn-primary w-full py-3 rounded-xl text-lg font-bold flex items-center justify-center gap-2"><i class="fas fa-user-tie"></i> Mi Oficina Virtual</button>
+        <div id="panelOficina" class="hidden mt-6 p-4 bg-black/50 rounded-xl text-left">
+            <div class="flex justify-between items-center border-b border-amber-400 pb-2 mb-4"><h3 class="text-xl font-bold text-amber-400">📊 MIS REFERIDOS</h3><button onclick="cerrarOficina()" class="text-white bg-red-600/50 hover:bg-red-600 px-3 py-1 rounded-full text-sm">✕ Cerrar</button></div>
+            <div class="grid grid-cols-2 gap-4 mb-4"><div class="bg-black/30 p-3 rounded-xl text-center"><p class="text-2xl font-bold text-amber-400" id="totalRef">0</p><p class="text-xs">Referidos activos</p></div><div class="bg-black/30 p-3 rounded-xl text-center"><p class="text-2xl font-bold text-amber-400" id="totalGan">$0</p><p class="text-xs">Comisiones generadas</p></div></div>
+            <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-amber-400 border-b border-gray-600"><th class="text-left py-2">Nombre</th><th class="text-left py-2">Código</th><th class="text-left py-2">Plan</th><th class="text-left py-2">Comisión</th></tr></thead><tbody id="tablaRef"><tr><td colspan="4" class="text-center py-4 text-amber-400/70">✨ Próximo referido aquí ✨</tbody></div>
+            <div class="mt-4 text-center"><button onclick="invitarAmigos()" class="btn-wsp inline-block py-2 px-4 rounded-full text-sm font-bold"><i class="fab fa-whatsapp text-lg mr-2"></i> Invitar a mis amigos</button></div>
+        </div>
+    </section>
+
+    <!-- QR DE AFILIADO -->
+    <section class="card text-center">
+        <h2 class="text-2xl font-bold text-amber-400 mb-2">📲 ESCANEA NUESTRO QR</h2>
+        <p class="text-gray-300 mb-3">Código de afiliado: <strong class="text-amber-400">NGE-204</strong></p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://maquinas-venezuela.pages.dev?ref=NGE-204" alt="QR Afiliado" class="mx-auto w-44 h-44">
+    </section>
+
+</div>
+
+<footer class="footer">
+    <p><strong>© 2026 MAQUINAS VENEZUELA</strong> | Todos los derechos reservados</p>
+    <p>AV 9 # 8-89 BARRIO EL LLANO - CÚCUTA</p>
+    <div class="mt-4"><a href="https://tutarjetadigital.netlify.app" class="btn-primary btn">📱 Tu Tarjeta Digital</a></div>
+    <p class="mt-4 text-sm">NGE - Nueva Generación Emprendedora · Unidos Ganamos Más</p>
+</footer>
+
+<script>
+    function toggleMenu(){document.getElementById('sidebar').classList.toggle('active');}
+    let slide=0;const slides=document.querySelectorAll('.carrusel-slide');if(slides.length){setInterval(()=>{slides[slide].classList.remove('active');slide=(slide+1)%slides.length;slides[slide].classList.add('active')},4000);}
+    function compartirSitio(){const url=window.location.href;if(navigator.share){navigator.share({title:document.title,text:'Mira este sitio web',url:url});}else{navigator.clipboard.writeText(url);alert('📋 Enlace copiado');}}
+    function copiarCodigo(){const codigo=document.getElementById('codigoAfiliado').innerText;navigator.clipboard.writeText(codigo);alert('✅ Código '+codigo+' copiado');}
+    const btnOficina=document.getElementById('btnOficina');if(btnOficina){btnOficina.addEventListener('click',function(){const panel=document.getElementById('panelOficina');panel.classList.toggle('hidden');if(!panel.classList.contains('hidden')){cargarReferidos();}});}
+    function cerrarOficina(){document.getElementById('panelOficina').classList.add('hidden');}
+    function cargarReferidos(){document.getElementById('tablaRef').innerHTML='<tr><td colspan="4" class="text-center py-4 text-amber-400/70">✨ Próximo referido aquí ✨</tbody>';document.getElementById('totalRef').innerText='0';document.getElementById('totalGan').innerText='$0';}
+    function invitarAmigos(){const url=window.location.href;const mensaje=`🎁 Te invito a obtener tu tarjeta digital. Código: NGE-204 🔗 ${url}`;if(navigator.share){navigator.share({title:'Invitación',text:'Código NGE-204',url:url});}else{window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`,'_blank');}}
+</script>
+</body>
+</html>
